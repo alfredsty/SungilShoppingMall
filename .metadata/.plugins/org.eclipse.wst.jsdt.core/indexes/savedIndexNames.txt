@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\Users\user\Documents\21510과정평가\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1758616866.index
+1266577761.index
+1296448020.index
+1443999268.index
+784834030.index
+4071585699.index
+509675133.index
