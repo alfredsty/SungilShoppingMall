@@ -62,7 +62,11 @@ GetConnection()함수는 DriverManager에 등록된 오라클드라이버를 식
 
 ![image](https://user-images.githubusercontent.com/102028778/186586085-5e484e10-bdec-4d54-bc0d-aec1dc54354c.png)
 
-url,idm,pw가 모두 일치하면 DB에 연결하고 DB test라는 문구를 띄우게 함.
+url,id,pw가 모두 일치하면 DB에 연결하고 DB test라는 문구를 띄우게 함.
+
+![image](https://user-images.githubusercontent.com/102028778/186795547-87fcea9a-1284-4805-aef1-a8eb61cba0b6.png)
+
+DB연결이 완료되었을 때 콘솔창
 
 ## 데이터베이스 테이블을 생성한 쿼리문
 ```sql
@@ -108,7 +112,11 @@ create table member_tbl_02(
 
 ![image](https://user-images.githubusercontent.com/102028778/186581519-f27180f2-8b1f-4c8d-96b5-6a9cb334d645.png)
 
-* 위 사진을 보면 value 값이 num인것을 볼 수 있다.
+위 사진을 보면 value 값이 num인것을 볼 수 있다.
+
+![image](https://user-images.githubusercontent.com/102028778/186795655-3769255d-5a5f-444f-b82f-75bc2443b211.png)
+
+회원번호가 100006까지 있으므로 100007로 생성되는것을 볼 수 있다.
 
 ## 회원등록시 데이터베이스에 추가시키는 코드
 ```java
@@ -154,7 +162,19 @@ String sql에 각각의 매개변수를 받아와 값을 넣어준다.
 
 값을 다 전달 받았으면 excuteUpdate함수를 통해 쿼리문이 실행됨.
 
-추가로 excuteUpdate는 SELECT문을 제외한 다른 쿼리문을 실행할 때 쓰임.
+* 추가로 excuteUpdate는 SELECT문을 제외한 다른 쿼리문을 실행할 때 쓰임.
+
+![image](https://user-images.githubusercontent.com/102028778/186796223-86bdb6d0-579f-406b-9278-6a85818eb3c9.png)
+
+넘겨줄 데이터를 적고 등록버튼을 눌러주면
+
+![image](https://user-images.githubusercontent.com/102028778/186796551-776e0d6f-cbd2-4de0-86b1-0ba365554709.png)
+
+테이블을 조회했을 때 
+
+![image](https://user-images.githubusercontent.com/102028778/186796603-8bed43c7-da96-4617-ae72-365cad24d1b8.png)
+
+제대로 등록이 되어있는것이 확인됨.
 
 ## 데이터베이스에 있는 값 회원목록에 띄우기
 
@@ -241,6 +261,7 @@ sql문을 보면 member_tbl_02테이블을 조회하는데  custno, custname, ph
 ResultSet의 next()함수는 마지막 행이 존재할 때 까지 반복한다.
 
 한마디로 next함수를 while문으로 돌려 마지막 행이 나올 떄 까지 getString으로 가져온 쿼리문 값을 리턴하는 것이다.
+
 
 
 
