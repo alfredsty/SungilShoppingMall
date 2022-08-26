@@ -37,8 +37,9 @@ public class DBConnect {
 	}
 }
 ```
+* 데이터베이스 연결 
 ![image](https://user-images.githubusercontent.com/102028778/186582624-7645a40c-3878-4939-b72f-5a8b31565a36.png)
--여기서 Connection은 데이터베이스 연결 설정을 하는 인터페이스다. Connection안에서 sql문이 실행되고 반환이 됨.
+여기서 Connection은 데이터베이스 연결 설정을 하는 인터페이스다. Connection안에서 sql문이 실행되고 반환이 됨.
 
 ![image](https://user-images.githubusercontent.com/102028778/186582885-41166257-8b43-4e8d-a6c6-4a6ad10e6e34.png)
 ### String으로 선언된 각각의 변수들의 의미는 다음과 같다.
@@ -49,22 +50,22 @@ public class DBConnect {
 
 ![image](https://user-images.githubusercontent.com/102028778/186583205-1e329c17-b76a-4983-b0fa-4c1742b2ac56.png)
 
-* Try Catch 내부 코드를 차근차근 하나씩 설명하자면
+Try Catch 내부 코드를 차근차근 하나씩 설명하자면
 
 ![image](https://user-images.githubusercontent.com/102028778/186583890-e028316c-650e-49a9-a0d0-a5920473251b.png)
 
-* Class의 ForName()이라는 함수를 써서 오라클드라이버에 로드시키고 DriverManager에 등록함.(접근하는 동시에 객체가 생성됨)
+Class의 ForName()이라는 함수를 써서 오라클드라이버에 로드시키고 DriverManager에 등록함.(접근하는 동시에 객체가 생성됨)
 
 ![image](https://user-images.githubusercontent.com/102028778/186583992-a5c99abc-3476-41e6-a32c-60f57bb31506.png)
 
-* GetConnection()함수는 DriverManager에 등록된 오라클드라이버를 식별한다. jdbc드라이버의 url,id,pw를 식별한다.
+GetConnection()함수는 DriverManager에 등록된 오라클드라이버를 식별한다. jdbc드라이버의 url,id,pw를 식별한다.
 
 ![image](https://user-images.githubusercontent.com/102028778/186586085-5e484e10-bdec-4d54-bc0d-aec1dc54354c.png)
 
-* url,idm,pw가 모두 일치하면 DB에 연결하고 DB test라는 문구를 띄우게 함.
+url,idm,pw가 모두 일치하면 DB에 연결하고 DB test라는 문구를 띄우게 함.
 
 ## 데이터베이스 테이블을 생성한 쿼리문
-```
+```sql
 create table member_tbl_02(
  custno number(6) primary key,
  custname varchar2(20),
@@ -110,7 +111,7 @@ create table member_tbl_02(
 * 위 사진을 보면 value 값이 num인것을 볼 수 있다.
 
 ## 회원등록시 데이터베이스에 추가시키는 코드
-```
+```java
 <%@ page import="DB.DBConnect"%>
 <%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -138,22 +139,26 @@ create table member_tbl_02(
 * Connection과 PreparedStatement는 이미 위에서 설명했기 때문에 생략하곘다.
 
 ![image](https://user-images.githubusercontent.com/102028778/186589288-e5d3ee2d-beca-428f-a320-a439c7751931.png)
-* member_tbl_02 values 테이블에 ?값을 넣어줄거다.
-* 왜 ?로 되어있냐면  나중에  pstmt.set으로 매개변수를 가져와서 넣어주기 때문이다.
+
+member_tbl_02 values 테이블에 ?값을 넣어줄거다.
+
+값이 왜 ?로 되어있냐면  나중에  pstmt.set으로 매개변수를 가져와서 넣어주기 때문이다.
 
 ![image](https://user-images.githubusercontent.com/102028778/186589699-fa102cc5-1b30-453c-b079-6c32d0edfc31.png)
 
-* String sql에 각각의 매개변수를 받아와 값을 넣어준다.
-* 모든 값이 String이기 때문에 setString으로 쓰이지만 custno(회원번호)는 에외이다. 매개변수를 정수로 넘기기 때문에 Integer.parseInt로 형변환을 해주어 값을 전달 받는다.
+String sql에 각각의 매개변수를 받아와 값을 넣어준다.
+
+모든 값이 String이기 때문에 setString으로 쓰이지만 custno(회원번호)는 예외이다. 매개변수를 정수로 넘기기 때문에 Integer.parseInt로 형변환을 해주어 값을 전달 받는다.
 
 ![image](https://user-images.githubusercontent.com/102028778/186590368-6270d508-d200-4f71-989a-2541dd9d3ffb.png)
 
-* 값을 다 전달 받았으면 excuteUpdate함수를 통해 쿼리문이 실행됨.
-* 추가로 excuteUpdate는 SELECT문을 제외한 다른 쿼리문을 실행할 때 쓰임.
+값을 다 전달 받았으면 excuteUpdate함수를 통해 쿼리문이 실행됨.
+
+추가로 excuteUpdate는 SELECT문을 제외한 다른 쿼리문을 실행할 때 쓰임.
 
 ## 데이터베이스에 있는 값 회원목록에 띄우기
 
-```
+```java
 <%@ page import="DB.DBConnect"%>
 <%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -172,10 +177,11 @@ create table member_tbl_02(
 
 ```
 
-* 똑같이 Connection 후  텍스트를 쿼리문으로 호출하기 위해 PreparedStatment를 써줌
-* 우리는 반환받을 sql 변수에 담긴 내용만 보면 됨.
+똑같이 Connection 후  텍스트를 쿼리문으로 호출하기 위해 PreparedStatment를 써줌
 
-* sql문을 보면 member_tbl_02테이블을 조회하는데  custno, custname, phone, address는 평범하지만 joindate와 grade는 조금 이상하다. 같이 보자.
+우리는 반환받을 sql 변수에 담긴 내용만 보면 됨.
+
+sql문을 보면 member_tbl_02테이블을 조회하는데  custno, custname, phone, address는 평범하지만 joindate와 grade는 조금 이상하다. 같이 보자.
 
 ![image](https://user-images.githubusercontent.com/102028778/186592939-518d8cb2-a01a-4157-b939-d59f430e758a.png)
 
@@ -186,7 +192,7 @@ create table member_tbl_02(
 여기서는 case문이 쓰였다. case문은 조건에 따라 입력을 달리할 수 있다. 
 회원등급에 따라 grade값이 달라진다.
 
-```
+```java
 <table class="table_line">
 				<tr>
 					<th>회원번호</th>
@@ -220,28 +226,24 @@ create table member_tbl_02(
 			</table>	
 
 ```
-*조회한 쿼리문을 표로 나타낸다.
+조회한 쿼리문을 표로 나타낸다.
 
 ![image](https://user-images.githubusercontent.com/102028778/186604672-bfbdc694-315b-496a-a9f7-387184022fad.png)
 
-* 첫 행에 각각 제목을 넣어준다.
+첫 행에 각각 제목을 넣어준다.
 
   ![image](https://user-images.githubusercontent.com/102028778/186605000-67fbe764-c476-4182-94f6-8d2362dccd7c.png)
   
-* 결과
+결과는 이러하다.
   
 ![image](https://user-images.githubusercontent.com/102028778/186605378-72200128-1435-4830-9e9c-72184f9d85b1.png)
 
-* ResultSet의 next()함수는 마지막 행이 존재할 때 까지 반복한다.
-* 한마디로 next함수를 while문으로 돌려 마지막 행이 나올 떄 까지 getString으로 가져온 쿼리문 값을 리턴하는 것이다.
+ResultSet의 next()함수는 마지막 행이 존재할 때 까지 반복한다.
 
-## Tool
+한마디로 next함수를 while문으로 돌려 마지막 행이 나올 떄 까지 getString으로 가져온 쿼리문 값을 리턴하는 것이다.
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
 
-## Skill 
 
-![Eclipse](https://img.shields.io/badge/Eclipse-2C2255.svg?&style=for-the-badge&logo=Eclipse&logocolor=white)
 
 
 
