@@ -235,8 +235,13 @@ create table member_tbl_02(
 * ResultSet의 next()함수는 마지막 행이 존재할 때 까지 반복한다.
 * 한마디로 next함수를 while문으로 돌려 마지막 행이 나올 떄 까지 getString으로 가져온 쿼리문 값을 리턴하는 것이다.
 
+## Tool
 
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
 
+## Skill 
+
+![Eclipse](https://img.shields.io/badge/Eclipse-2C2255.svg?&style=for-the-badge&logo=Eclipse&logocolor=white)
 
 
 
